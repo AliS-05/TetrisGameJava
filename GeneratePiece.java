@@ -127,6 +127,7 @@ public class GeneratePiece {
     }
 
     public static int[][] rotate(int piece, int pieceX, int pieceY) {
+        System.out.println("ROTATION SUCCESSFUL");
         int[][] coords = new int[4][2];
         switch (piece) {
             case 1: 
@@ -136,8 +137,8 @@ public class GeneratePiece {
                 coords = getIPieceCoordinates(pieceX, pieceY);
                 for (int i = 0; i < coords.length; i++) {
                     int temp = coords[i][0];
-                    coords[i][0] = -coords[i][1] + pieceX + 1;
-                    coords[i][1] = temp - pieceY + 1;
+                    coords[i][0] = coords[i][1] + pieceX;  
+                    coords[i][1] = -temp + pieceY + 1;      
                 }
                 break;
             case 3:
