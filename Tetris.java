@@ -127,12 +127,12 @@ public class Tetris extends JPanel implements KeyListener {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-            int[][] rotatedCoords = GeneratePiece.rotate(pieceType,pieceX,pieceY);
-            if (rotatedCoords != null) {
-                pieceX = rotatedCoords[0][0];
-                pieceY = rotatedCoords[0][1];
-            }
-            break;
+                int[][] rotatedCoords = GeneratePiece.rotatePiece(pieceType,pieceX,pieceY);
+                if (rotatedCoords != null) {
+                    newX = rotatedCoords[0][0];
+                    newY = rotatedCoords[0][1];
+                }
+                break;
             case KeyEvent.VK_LEFT:
                 if (!isCollision(pieceX - 1, pieceY)) {
                     newX = pieceX - 1;

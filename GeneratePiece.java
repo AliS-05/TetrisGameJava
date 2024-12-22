@@ -126,46 +126,55 @@ public class GeneratePiece {
         };
     }
 
-    public static int[][] rotate(int piece, int pieceX, int pieceY) {
+    public static int[][] rotatePiece(int piece, int pieceX, int pieceY) {
         System.out.println("ROTATION SUCCESSFUL");
-        int[][] coords = new int[4][2];
+        int[][] rotatedCoords = new int[4][2];
         switch (piece) {
             case 1: 
-                coords = getOPieceCoordinates(pieceX, pieceY);
+                rotatedCoords = getOPieceCoordinates(pieceX, pieceY);
                 break;
             case 2: 
-                coords = getIPieceCoordinates(pieceX, pieceY);
-                for (int i = 0; i < coords.length; i++) {
-                    int temp = coords[i][0];
-                    coords[i][0] = coords[i][1] + pieceX;  
-                    coords[i][1] = -temp + pieceY + 1;      
+                rotatedCoords = getIPieceCoordinates(pieceX, pieceY);
+                if (rotatedCoords[0][1] == rotatedCoords[1][1] - 1 &&
+                    rotatedCoords[1][1] == rotatedCoords[2][1] - 1 &&
+                    rotatedCoords[2][1] == rotatedCoords[3][1] - 1) {
+                    // Rotate from vertical to horizontal
+                    for (int i = 0; i < rotatedCoords.length; i++) {
+                        int tempX = rotatedCoords[i][0] - pieceX;
+                        int tempY = rotatedCoords[i][1] - pieceY;
+                        rotatedCoords[i][0] = pieceX + tempY;  // Rotate to the right
+                        rotatedCoords[i][1] = pieceY;          // Keep y the same
+                    }
+                } else { // If it's horizontal, rotate it to vertical
+                    for (int i = 0; i < rotatedCoords.length; i++) {
+                        int tempX = rotatedCoords[i][0] - pieceX;
+                        int tempY = rotatedCoords[i][1] - pieceY;
+                        rotatedCoords[i][0] = pieceX;        // Keep x the same
+                        rotatedCoords[i][1] = pieceY + tempX;  // Rotate to the right
+                    }
                 }
                 break;
-            case 3:
-                coords = getSPieceCoordinates(pieceX, pieceY);
+                case 3:
+                rotatedCoords = getSPieceCoordinates(pieceX, pieceY);
                 // Implement rotation logic for the S piece
                 break;
             case 4: 
-                coords = getZPieceCoordinates(pieceX, pieceY);
+                rotatedCoords = getZPieceCoordinates(pieceX, pieceY);
                 // Implement rotation logic for the Z piece
                 break;
             case 5: 
-                coords = getLPieceCoordinates(pieceX, pieceY);
+                rotatedCoords = getLPieceCoordinates(pieceX, pieceY);
                 // Implement rotation logic for the L piece
                 break;
             case 6: 
-                coords = getJPieceCoordinates(pieceX, pieceY);
+                rotatedCoords = getJPieceCoordinates(pieceX, pieceY);
                 // Implement rotation logic for the J piece
                 break;
             case 7: 
-                coords = getTPieceCoordinates(pieceX, pieceY);
+                rotatedCoords = getTPieceCoordinates(pieceX, pieceY);
                 // Implement rotation logic for the T piece
                 break;
         }
-        return coords;
+        return rotatedCoords;
     }
-    
-    
-
-
 }
